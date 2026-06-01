@@ -172,7 +172,7 @@ const HeroSection = () => {
         <div className="hero-photo-card relative h-40 w-40 overflow-hidden rounded-3xl border border-sky-500/40 bg-slate-900/80 shadow-soft-lg backdrop-blur sm:h-44 sm:w-44 lg:h-56 lg:w-56">
           {/* Placeholder avatar – replace src with your photo in /public */}
           <img
-            src="/diwakar.png"
+            src="/diwakar.jpg"
             alt="Your avatar"
             className="h-full w-full object-cover"
             loading="lazy"
