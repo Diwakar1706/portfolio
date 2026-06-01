@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Points, PointMaterial } from '@react-three/drei';
 import { motion } from 'framer-motion';
@@ -64,12 +64,24 @@ const ParticlesBackground = () => {
  * - CTA button scrolling to contact section
  */
 const HeroSection = () => {
+  const resumeFrameRef = useRef<HTMLIFrameElement | null>(null);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
   const scrollToContact = () => {
     const el = document.getElementById('contact');
     if (!el) return;
     const offset = 100;
     const top = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  const openResume = () => setIsResumeOpen(true);
+  const closeResume = () => setIsResumeOpen(false);
+  const printResume = () => {
+    const frameWindow = resumeFrameRef.current?.contentWindow;
+    if (!frameWindow) return;
+    frameWindow.focus();
+    frameWindow.print();
   };
 
   return (
@@ -152,15 +164,14 @@ Full Stack Developer with hands-on experience in building scalable web applicati
           </button>
 
           {/* Link to your resume file in /public (e.g. /resume.pdf) */}
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={openResume}
             className="inline-flex items-center gap-2 rounded-full border border-slate-600/80 bg-slate-900/80 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm backdrop-blur transition hover:border-sky-400/80 hover:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80"
           >
             <Mail className="h-4 w-4" />
             get Resume
-          </a>
+          </button>
         </motion.div>
       </div>
 
@@ -189,6 +200,54 @@ Full Stack Developer with hands-on experience in building scalable web applicati
           </p>
         </div>
       </motion.div>
+
+      {isResumeOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 py-6 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Resume preview"
+          onClick={closeResume}
+        >
+          <div
+            className="flex h-full w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-slate-700/80 bg-slate-950/95 shadow-soft-lg"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 px-4 py-3 sm:px-6">
+              <p className="text-sm font-semibold text-slate-100">Resume Preview</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={printResume}
+                  className="rounded-full border border-slate-700/80 px-3 py-1.5 text-xs font-semibold text-slate-200 transition hover:border-sky-400/80 hover:text-sky-200"
+                >
+                  Print
+                </button>
+                <a
+                  href="/resume.pdf"
+                  download="Diwakar_Resume.pdf"
+                  className="rounded-full border border-slate-700/80 px-3 py-1.5 text-xs font-semibold text-slate-200 transition hover:border-sky-400/80 hover:text-sky-200"
+                >
+                  Download
+                </a>
+                <button
+                  type="button"
+                  onClick={closeResume}
+                  className="rounded-full bg-sky-400 px-3 py-1.5 text-xs font-semibold text-slate-950 transition hover:bg-sky-300"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <iframe
+              ref={resumeFrameRef}
+              title="Resume PDF"
+              src="/resume.pdf"
+              className="h-full w-full"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
