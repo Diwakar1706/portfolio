@@ -121,6 +121,10 @@ const HeroSection = () => {
           <p className="text-sm font-medium uppercase tracking-[0.22em] text-sky-300 sm:text-xs">
             Full‑Stack Developer &nbsp;·&nbsp; Problem Solver
           </p>
+          <p className="text-sm text-slate-300 sm:text-xs">
+            B.Tech, Computer Science and Engineering &nbsp;·&nbsp; LNCTS Bhopal
+            &nbsp;·&nbsp; 8.03/10 CGPA
+          </p>
         </motion.div>
 
         <motion.p
@@ -129,10 +133,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.22, duration: 0.4 }}
         >
-          I&apos;m a passionate developer with a strong foundation in modern web
-          technologies. I enjoy building clean, performant experiences and
-          learning new tools quickly. This portfolio highlights my experience,
-          projects, and the skills I&apos;m ready to bring to your team.
+Full Stack Developer with hands-on experience in building scalable web applications using the MERN stack. Skilled in designing RESTful APIs, real-time systems, and integrating AI/ML and Generative AI features into applications. Strong in DSA and problem-solving, aiming for an SDE role to build impactful solutions.
         </motion.p>
 
         <motion.div
@@ -153,7 +154,8 @@ const HeroSection = () => {
           {/* Link to your resume file in /public (e.g. /resume.pdf) */}
           <a
             href="/resume.pdf"
-            download="Diwakar_Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-slate-600/80 bg-slate-900/80 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm backdrop-blur transition hover:border-sky-400/80 hover:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/80"
           >
             <Mail className="h-4 w-4" />
