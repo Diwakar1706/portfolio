@@ -198,8 +198,7 @@ const ContactSection = () => {
             {YOUR_EMAIL}
           </a>
           <p className="mt-2 text-xs text-slate-400">
-            Prefer email? Feel free to contact me directly using the address
-            above.
+            connect collaborate and develop together!
           </p>
         </div>
 
