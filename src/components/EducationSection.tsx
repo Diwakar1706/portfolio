@@ -12,7 +12,7 @@ type EducationItem = {
 // Placeholder education – replace with your actual data.
 const EDUCATION: EducationItem[] = [
   {
-    level: 'B.Tech in Computer Science',
+    level: 'B.Tech in Computer Science & Engineering',
     institution: 'Lakshmi Narain College of Technology and Science',
     boardOrUniversity: 'Bhopal, Madhya Pradesh',
     year: '2023 – 2027',
