@@ -13,4 +13,89 @@
   }
 }
 
+[data-theme='light'] .text-slate-50,
+[data-theme='light'] .text-slate-100,
+[data-theme='light'] .text-slate-200 {
+  color: rgb(15 23 42);
+}
 
+[data-theme='light'] .text-slate-300,
+[data-theme='light'] .text-slate-400 {
+  color: rgb(71 85 105);
+}
+
+[data-theme='light'] .bg-slate-900\/70,
+[data-theme='light'] .bg-slate-900\/80 {
+  background-color: rgb(255 255 255 / 0.82);
+}
+
+[data-theme='light'] .bg-slate-800\/80,
+[data-theme='light'] .bg-slate-800 {
+  background-color: rgb(241 245 249 / 0.9);
+}
+
+[data-theme='light'] .border-slate-800\/80,
+[data-theme='light'] .ring-slate-700\/80 {
+  border-color: rgb(226 232 240);
+  --tw-ring-color: rgb(226 232 240);
+}
+
+[data-theme='light'] .hero-card {
+  background:
+    radial-gradient(circle at top left, rgb(224 242 254 / 0.95), transparent 34%),
+    linear-gradient(135deg, rgb(255 255 255 / 0.96), rgb(248 250 252 / 0.94));
+  border-color: rgb(203 213 225);
+  box-shadow: 0 24px 60px rgb(15 23 42 / 0.16);
+}
+
+[data-theme='light'] .hero-canvas-overlay {
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.72),
+    rgb(240 249 255 / 0.4),
+    rgb(255 255 255 / 0.88)
+  );
+}
+
+[data-theme='light'] .hero-photo-card {
+  background-color: rgb(255 255 255 / 0.88);
+  border-color: rgb(14 165 233 / 0.45);
+  box-shadow: 0 18px 45px rgb(14 165 233 / 0.16);
+}
+
+[data-theme='light'] .hero-role-badge {
+  background-color: rgb(255 255 255 / 0.9);
+  box-shadow: 0 14px 32px rgb(15 23 42 / 0.14);
+}
+
+.tech-marquee-track {
+  animation: tech-marquee 28s linear infinite;
+}
+
+.tech-marquee:hover .tech-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes tech-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+[data-theme='light'] .tech-marquee {
+  background-color: rgb(255 255 255 / 0.84);
+  border-color: rgb(226 232 240);
+  box-shadow: 0 18px 45px rgb(15 23 42 / 0.12);
+}
+
+[data-theme='light'] .tech-marquee-fade-left {
+  background: linear-gradient(to right, rgb(255 255 255), transparent);
+}
+
+[data-theme='light'] .tech-marquee-fade-right {
+  background: linear-gradient(to left, rgb(255 255 255), transparent);
+}

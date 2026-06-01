@@ -3,9 +3,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUp, Loader2 } from 'lucide-react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
+import TechMarquee from './components/TechMarquee';
 import ExperienceSection from './components/ExperienceSection';
 import ProjectsSection from './components/ProjectsSection';
 import SkillsSection from './components/SkillsSection';
+import CodingStreak from './components/CodingStreak.jsx';
 import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
 import SectionWrapper from './components/SectionWrapper';
@@ -15,11 +17,13 @@ const sections = [
   'experience',
   'projects',
   'skills',
+  'profile',
   'education',
   'contact',
 ] as const;
 
 export type SectionId = (typeof sections)[number];
+export type ThemeMode = 'dark' | 'light';
 
 /**
  * Root application component.
@@ -33,12 +37,21 @@ function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('home');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    return (localStorage.getItem('theme') as ThemeMode) || 'dark';
+  });
 
   // Initial splash loader for a more polished first impression
   useEffect(() => {
     const timeout = setTimeout(() => setIsLoading(false), 1200);
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
 
   // Track scroll position for active section + back-to-top button
   useEffect(() => {
@@ -69,8 +82,23 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const toggleTheme = () => {
+    setTheme((currentTheme) =>
+      currentTheme === 'dark' ? 'light' : 'dark',
+    );
+  };
+
+  const isDarkTheme = theme === 'dark';
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-slate-100 font-sans">
+    <div
+      data-theme={theme}
+      className={`min-h-screen font-sans transition-colors duration-300 ${
+        isDarkTheme
+          ? 'bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-slate-100'
+          : 'bg-gradient-to-b from-slate-50 via-white to-sky-50 text-slate-950'
+      }`}
+    >
       {/* Initial lightweight loading overlay */}
       <AnimatePresence>
         {isLoading && (
@@ -97,12 +125,19 @@ function App() {
       </AnimatePresence>
 
       {/* Sticky navbar */}
-      <Navbar activeSection={activeSection} />
+      <Navbar
+        activeSection={activeSection}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
 
       {/* Main content */}
       <main className="mx-auto flex max-w-6xl flex-col gap-24 px-4 pb-24 pt-28 sm:px-6 lg:px-8 lg:gap-28 lg:pt-32">
         <SectionWrapper id="home">
           <HeroSection />
+          <div className="mt-8">
+            <TechMarquee />
+          </div>
         </SectionWrapper>
 
         <SectionWrapper id="experience" title="Experience" eyebrow="Internships">
@@ -117,6 +152,10 @@ function App() {
           <SkillsSection />
         </SectionWrapper>
 
+        <SectionWrapper id="profile" title="Coding Activity" eyebrow="Profile">
+          <CodingStreak />
+        </SectionWrapper>
+
         <SectionWrapper id="education" title="Education" eyebrow="Academic Journey">
           <EducationSection />
         </SectionWrapper>
@@ -129,10 +168,14 @@ function App() {
       {/* Back-to-top button */}
       <AnimatePresence>
         {showScrollTop && (
-          <motion.button
-            type="button"
-            onClick={scrollToTop}
-            className="fixed bottom-6 right-4 z-30 rounded-full bg-slate-900/80 p-3 text-sky-400 shadow-soft-lg backdrop-blur transition hover:bg-slate-800 sm:bottom-8 sm:right-6"
+            <motion.button
+              type="button"
+              onClick={scrollToTop}
+              className={`fixed bottom-6 right-4 z-30 rounded-full p-3 shadow-soft-lg backdrop-blur transition sm:bottom-8 sm:right-6 ${
+                isDarkTheme
+                  ? 'bg-slate-900/80 text-sky-400 hover:bg-slate-800'
+                  : 'bg-white/85 text-sky-600 ring-1 ring-slate-200 hover:bg-slate-100'
+              }`}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}

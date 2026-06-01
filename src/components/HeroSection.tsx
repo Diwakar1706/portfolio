@@ -73,7 +73,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-5 py-8 shadow-soft-lg sm:px-8 sm:py-10 lg:flex lg:items-center lg:gap-10 lg:px-10 lg:py-12">
+    <section className="hero-card relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-5 py-8 shadow-soft-lg sm:px-8 sm:py-10 lg:flex lg:items-center lg:gap-10 lg:px-10 lg:py-12">
       {/* Three.js canvas background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <Canvas
@@ -90,7 +90,7 @@ const HeroSection = () => {
             />
           </Suspense>
         </Canvas>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-950/90" />
+        <div className="hero-canvas-overlay pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-950/90" />
       </div>
 
       {/* Left: Text content */}
@@ -169,7 +169,7 @@ const HeroSection = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.28, duration: 0.5 }}
       >
-        <div className="relative h-40 w-40 overflow-hidden rounded-3xl border border-sky-500/40 bg-slate-900/80 shadow-soft-lg backdrop-blur sm:h-44 sm:w-44 lg:h-56 lg:w-56">
+        <div className="hero-photo-card relative h-40 w-40 overflow-hidden rounded-3xl border border-sky-500/40 bg-slate-900/80 shadow-soft-lg backdrop-blur sm:h-44 sm:w-44 lg:h-56 lg:w-56">
           {/* Placeholder avatar – replace src with your photo in /public */}
           <img
             src="/diwakar.jpg"
@@ -180,7 +180,7 @@ const HeroSection = () => {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-sky-500/10" />
         </div>
 
-        <div className="pointer-events-none absolute -bottom-3 -left-3 rounded-2xl bg-slate-900/90 px-3 py-2 text-xs shadow-soft-lg ring-1 ring-slate-700/80">
+        <div className="hero-role-badge pointer-events-none absolute -bottom-3 -left-3 rounded-2xl bg-slate-900/90 px-3 py-2 text-xs shadow-soft-lg ring-1 ring-slate-700/80">
           <p className="font-semibold text-slate-50">Full‑Stack Developer</p>
           <p className="text-[11px] text-slate-400">
             
